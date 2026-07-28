@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/students.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<div id="loader" class="loader" style="display:none;">
+    <div class="spinner"></div>
+</div>
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="images/logo.png" alt="Logo">
+        <h2>Smart Student</h2>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="students.html" class="active">Students</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+
+</nav>
+
+    <div class="page-header">
+
+    <div class="header-icon">
+        <i class="fas fa-users"></i>
+    </div>
+
+    <div class="header-text">
+        <h1>Student Records</h1>
+        <p>Manage and view all registered students</p>
+    </div>
+
+</div>
+    
+    <div class="top-bar">
+
+    <div class="search-box">
+
+    <input type="text"
+           id="searchInput"
+           placeholder="Search by Name, Roll No or Department">
+
+    <button id="refreshBtn">
+        <i class="fas fa-rotate-right"></i>
+        Refresh
+    </button>
+    <button id="exportPdfBtn" class="refresh-btn">
+    <i class="fas fa-file-pdf"></i> Export PDF
+</button>
+
+</div>
+
+     <div class="student-card">
+
+    <div class="student-card-icon">
+        <i class="fas fa-users"></i>
+    </div>
+
+    <h2 id="studentCount">0</h2>
+
+    <p>Registered Students</p>
+
+</div>
+
+</div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Photo</th>
+<th>Name</th>
+<th>Roll No</th>
+<th>Department</th>
+<th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="studentsBody">
+
+        </tbody>
+
+    </table>
+
+    <div id="toast"></div>
+    <div id="studentModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <img id="modalPhoto" width="120">
+
+        <h2 id="modalName"></h2>
+
+        <p><strong>Roll:</strong> <span id="modalRoll"></span></p>
+
+        <p><strong>Department:</strong> <span id="modalDepartment"></span></p>
+
+        <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+
+        <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
+
+    </div>
+
+</div>
+
+    <script src="js/toast.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/students.js"></script>
+
+    </body>
+    </html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Smart Student Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="images/logo.png" alt="Logo">
+        <h2>Smart Student</h2>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="students.html">Students</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+        <button id="themeToggle">
+    🌙 Dark Mode
+</button>
+    </ul>
+
+</nav>
+
+<!-- Dashboard Header -->
+
+<section class="dashboard-header">
+
+    <h1>Dashboard</h1>
+
+    <div class="welcome-box">
+
+    <h2>👋 Welcome, Admin</h2>
+
+    <p id="currentDateTime"></p>
+
+</div>
+
+    <p>Welcome to Smart Student Management System</p>
+
+</section>
+
+<div class="hero-banner">
+    <h1>Smart Student Management System</h1>
+    <p>Powered by AWS Cloud</p>
+</div>
+
+<!-- Statistics Cards -->
+
+<section class="dashboard-cards">
+
+    <div class="dashboard-card">
+        <i class="fas fa-user-graduate"></i>
+        <h2 id="totalStudents">0</h2>
+        <p>Total Students</p>
+    </div>
+
+    <div class="dashboard-card">
+        <i class="fas fa-building"></i>
+        <h2>5</h2>
+        <p>Departments</p>
+    </div>
+
+    <div class="dashboard-card">
+        <i class="fas fa-user-plus"></i>
+        <h2 id="registrations">0</h2>
+        <p>Registrations</p>
+    </div>
+
+    <div class="dashboard-card">
+        <i class="fas fa-cloud"></i>
+        <h2>5+</h2>
+        <p>AWS Services</p>
+    </div>
+
+</section>
+<!-- ================= QUICK ACTIONS ================= -->
+
+<section class="quick-actions">
+
+    <h2>Quick Actions</h2>
+
+    <div class="action-container">
+
+        <a href="register.html" class="action-card">
+            <i class="fas fa-user-plus"></i>
+            <h3>Register Student</h3>
+        </a>
+
+        <a href="students.html" class="action-card">
+            <i class="fas fa-users"></i>
+            <h3>Student Records</h3>
+        </a>
+
+        <a href="index.html" class="action-card">
+            <i class="fas fa-house"></i>
+            <h3>Home</h3>
+        </a>
+
+        <a href="login.html" class="action-card">
+            <i class="fas fa-right-from-bracket"></i>
+            <h3>Logout</h3>
+        </a>
+
+    </div>
+
+</section>
+<!-- ================= RECENT STUDENTS ================= -->
+
+<section class="recent-students">
+
+    <h2>Recent Registered Students</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Department</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="recentStudentsBody">
+
+                <tr>
+
+                    <td>
+                        <img src="images/logo.png" class="student-photo">
+                    </td>
+
+                    <td>Loading...</td>
+
+                    <td>----</td>
+
+                    <td>----</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<script src="js/dashboard.js"></script>
+<script>
+
+</script>
+<script>
+function logout(){
+    localStorage.removeItem("loggedIn");
+    window.location.href = "login.html";
+}
+</script>
+
+<script>
+function updateDateTime(){
+    const now = new Date();
+
+    document.getElementById("currentDateTime").innerHTML =
+        now.toLocaleDateString() + " | " +
+        now.toLocaleTimeString();
+}
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const themeBtn = document.getElementById("themeToggle");
+
+themeBtn.onclick = function(){
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme","dark");
+        themeBtn.innerHTML="☀️ Light Mode";
+    }else{
+        localStorage.setItem("theme","light");
+        themeBtn.innerHTML="🌙 Dark Mode";
+    }
+};
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+    themeBtn.innerHTML="☀️ Light Mode";
+}
+function exportPDF() {
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Smart Student Management System", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text("Student Records Report", 20, 30);
+
+    doc.text("Export Date: " + new Date().toLocaleString(), 20, 40);
+
+    doc.text("-------------------------------------------", 20, 48);
+
+    doc.save("Student_Records.pdf");
+}
+</script>
+
+</body>
+</html>
